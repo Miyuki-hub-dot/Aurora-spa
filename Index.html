@@ -1,17 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Together Spa | Relajate en compañia</title>
+  <meta name="description" content="Aurora Spa: experiencias de relajación para compartir en pareja, con amigos o en familia.">
+  <title>Aurora Spa | Relájate en compañía</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="sitio-header">
-    <h1>Together Spa</h1>
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#contacto">Contacto</a>
+
+  <!-- CABECERA FIJA -->
+  <header class="site-header">
+    <a href="#inicio" class="logo" data-route="inicio">
+      <span class="logo-mark">≈</span> Aurora<span>Spa</span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-menu">
+        <span class="sr-only">Abrir menú</span> ☰
+      </button>
+      <ul id="main-menu">
+        <li><a href="#inicio"    data-route="inicio">Inicio</a></li>
+        <li><a href="#nosotros"  data-route="nosotros">Nosotros</a></li>
+        <li><a href="#planes"    data-route="planes">Planes</a></li>
+        <li><a href="#contacto"  data-route="contacto">Contacto</a></li>
+      </ul>
+    </nav>
   </header>
+
+  <!-- CONTENEDOR DE VISTAS SPA -->
+  <main id="app">
+
+    <!-- VISTA: INICIO -->
+    <section id="vista-inicio" class="vista activa" aria-labelledby="titulo-inicio">
+      <header class="hero">
+        <h1 id="titulo-inicio">Relájate. Conecta. Comparte.</h1>
+        <p>Experiencias de bienestar diseñadas para disfrutar en pareja, con amigos o en familia.</p>
+        <a href="#planes" class="btn-primario" data-route="planes">Ver planes</a>
+      </header>
+
+      <section class="resumen-planes">
+        <h2>Un momento para compartir</h2>
+        <p>Masajes, mascarillas y rituales de relajación en un ambiente pensado para la calma.</p>
+      </section>
+    </section>
+
+    <!-- VISTA: NOSOTROS -->
+    <section id="vista-nosotros" class="vista" aria-labelledby="titulo-nosotros" hidden>
+      <h1 id="titulo-nosotros">Acerca de Aurora Spa</h1>
+
+      <article class="nosotros-bloque">
+        <h2>Nuestra esencia</h2>
+        <p>Aurora Spa nació con una idea simple: el bienestar se disfruta mejor en compañía.
+           Creamos un espacio de serenidad donde parejas, amigos y familias pueden desconectarse del ruido
+           y reconectar entre ellos.</p>
+      </article>
+
+      <article class="nosotros-bloque">
+        <h2>Lo que encontrarás</h2>
+        <ul>
+          <li>Masajes relajantes (no medicinales) en salas privadas o compartidas.</li>
+          <li>Mascarillas faciales y corporales con productos suaves.</li>
+          <li>Rituales de respiración y estiramiento guiado.</li>
+          <li>Ambientes con aromaterapia, música suave y luz cálida.</li>
+        </ul>
+      </article>
+
+      <article class="nosotros-bloque">
+        <h2>Nuestro compromiso</h2>
+        <p>Serenidad, higiene, calidez humana y una experiencia pensada para que cada visita sea un recuerdo compartido.</p>
+      </article>
+    </section>
+
+    <!-- VISTA: PLANES -->
+    <section id="vista-planes" class="vista" aria-labelledby="titulo-planes" hidden>
+      <h1 id="titulo-planes">Nuestros Planes</h1>
+      <p class="intro">Cada plan está pensado para compartir. Elige el que mejor se ajuste a tu momento.</p>
+
+      <div class="grid-planes">
+
+        <article class="plan-card" data-plan="duo">
+          <h2>Plan Dúo Sereno</h2>
+          <p class="plan-precio">$120.000 <small>/ 2 personas</small></p>
+          <ul>
+            <li>Masaje relajante 50 min (pareja)</li>
+            <li>Mascarilla facial de arcilla suave</li>
+            <li>Infusión de bienvenida</li>
+            <li>Duración total: 90 min</li>
+          </ul>
+          <button class="btn-primario btn-plan" data-plan="duo">Reservar</button>
+        </article>
+
+        <article class="plan-card destacado" data-plan="amigos">
+          <h2>Plan Amigos en Calma</h2>
+          <p class="plan-precio">$180.000 <small>/ 3-4 personas</small></p>
+          <ul>
+            <li>Masaje relajante 40 min por persona</li>
+            <li>Mascarilla facial + exfoliación suave</li>
+            <li>Ritual de respiración grupal</li>
+            <li>Duración total: 2 h</li>
+          </ul>
+          <button class="btn-primario btn-plan" data-plan="amigos">Reservar</button>
+        </article>
+
+        <article class="plan-card" data-plan="familia">
+          <h2>Plan Familia Aurora</h2>
+          <p class="plan-precio">$250.000 <small>/ hasta 5 personas</small></p>
+          <ul>
+            <li>Masaje relajante breve (25 min) por persona</li>
+            <li>Mascarillas suaves para toda la familia</li>
+            <li>Zona de descanso y aromaterapia</li>
+            <li>Duración total: 2 h 30 min</li>
+          </ul>
+          <button class="btn-primario btn-plan" data-plan="familia">Reservar</button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- VISTA: CONTACTO -->
+    <section id="vista-contacto" class="vista" aria-labelledby="titulo-contacto" hidden>
+      <h1 id="titulo-contacto">Contacto y Reservas</h1>
+      <p>Cuéntanos qué plan te interesa y te confirmaremos disponibilidad.</p>
+
+      <form id="form-reserva" novalidate>
+        <label for="nombre">Nombre completo</label>
+        <input id="nombre" name="nombre" type="text" required autocomplete="name">
+
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+
+        <label for="plan">Plan de interés</label>
+        <select id="plan" name="plan" required>
+          <option value="">Selecciona un plan</option>
+          <option value="duo">Dúo Sereno</option>
+          <option value="amigos">Amigos en Calma</option>
+          <option value="familia">Familia Aurora</option>
+        </select>
+
+        <label for="mensaje">Mensaje (opcional)</label>
+        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+
+        <button type="submit" class="btn-primario">Enviar solicitud</button>
+        <p id="form-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- PIE -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Aurora Spa. Todos los derechos reservados.</p>
+    <address>
+      Calle Ejemplo 123, Ciudad · <a href="tel:+123456789">+12 345 6789</a>
+    </address>
+  </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
