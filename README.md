@@ -3,23 +3,6 @@
 App web full stack para un spa de bienestar en compañía: sitio público, catálogo desde base de datos,
 formulario de reservas real, panel de administrador con login (JWT) y asistente de IA.
 
-## Estructura
-```
-together-spa/
-├── frontend/            # Sitio estático (se publica en GitHub Pages)
-│   ├── index.html       # Sitio público (SPA con rutas por #hash)
-│   ├── admin.html       # Panel de administrador
-│   ├── css/styles.css
-│   └── js/              # config.js · utils.js · app.js · chat.js · admin.js
-└── backend/             # API Node + Express + MongoDB (se publica en Render)
-    ├── server.js        # Arranque, CORS, rutas, errores
-    ├── seed.js          # Carga planes iniciales y crea el admin
-    ├── models/          # Plan · Cita · Admin
-    ├── routes/          # planes · citas · auth · ia
-    ├── middleware/auth.js
-    └── utils/helpers.js
-```
-
 ## Correr en local
 1. `cd backend && npm install`
 2. Copia `.env.example` a `.env` y llena los valores.
