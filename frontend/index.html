@@ -77,45 +77,8 @@
       <h1 id="titulo-planes">Nuestros Planes</h1>
       <p class="intro">Cada plan está pensado para compartir. Elige el que mejor se ajuste a tu momento.</p>
 
-      <div class="grid-planes">
-
-        <article class="plan-card" data-plan="duo">
-          <h2>Plan Dúo Sereno</h2>
-          <p class="plan-precio">$120.000 <small>/ 2 personas</small></p>
-          <ul>
-            <li>Masaje relajante 50 min (pareja)</li>
-            <li>Mascarilla facial de arcilla suave</li>
-            <li>Infusión de bienvenida</li>
-            <li>Duración total: 90 min</li>
-          </ul>
-          <button class="btn-primario btn-plan" data-plan="duo">Reservar</button>
-        </article>
-
-        <article class="plan-card destacado" data-plan="amigos">
-          <h2>Plan Amigos en Calma</h2>
-          <p class="plan-precio">$180.000 <small>/ 3-4 personas</small></p>
-          <ul>
-            <li>Masaje relajante 40 min por persona</li>
-            <li>Mascarilla facial + exfoliación suave</li>
-            <li>Ritual de respiración grupal</li>
-            <li>Duración total: 2 h</li>
-          </ul>
-          <button class="btn-primario btn-plan" data-plan="amigos">Reservar</button>
-        </article>
-
-        <article class="plan-card" data-plan="familia">
-          <h2>Plan Familia Aurora</h2>
-          <p class="plan-precio">$250.000 <small>/ hasta 5 personas</small></p>
-          <ul>
-            <li>Masaje relajante breve (25 min) por persona</li>
-            <li>Mascarillas suaves para toda la familia</li>
-            <li>Zona de descanso y aromaterapia</li>
-            <li>Duración total: 2 h 30 min</li>
-          </ul>
-          <button class="btn-primario btn-plan" data-plan="familia">Reservar</button>
-        </article>
-
-      </div>
+      <!-- NUEVO: las tarjetas las crea js/app.js con los datos de la API -->
+      <div id="grid-planes" class="grid-planes" aria-live="polite"></div>
     </section>
 
     <!-- VISTA: CONTACTO -->
@@ -125,24 +88,31 @@
 
       <form id="form-reserva" novalidate>
         <label for="nombre">Nombre completo</label>
-        <input id="nombre" name="nombre" type="text" required autocomplete="name">
+        <input id="nombre" name="nombre" type="text" required maxlength="100" autocomplete="name">
 
         <label for="email">Correo electrónico</label>
         <input id="email" name="email" type="email" required autocomplete="email">
 
+        <label for="telefono">Teléfono (opcional)</label>
+        <input id="telefono" name="telefono" type="tel" maxlength="30" autocomplete="tel">
+
         <label for="plan">Plan de interés</label>
         <select id="plan" name="plan" required>
           <option value="">Selecciona un plan</option>
-          <option value="duo">Dúo Sereno</option>
-          <option value="amigos">Amigos en Calma</option>
-          <option value="familia">Familia Aurora</option>
+          <!-- las opciones las agrega js/app.js desde la API -->
         </select>
 
+        <label for="fecha">Fecha y hora deseadas</label>
+        <input id="fecha" name="fecha" type="datetime-local" required>
+
+        <label for="personas">Número de personas</label>
+        <input id="personas" name="personas" type="number" min="1" max="10" value="2" required>
+
         <label for="mensaje">Mensaje (opcional)</label>
-        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+        <textarea id="mensaje" name="mensaje" rows="4" maxlength="500"></textarea>
 
         <button type="submit" class="btn-primario">Enviar solicitud</button>
-        <p id="form-feedback" role="status" aria-live="polite"></p>
+        <p id="form-feedback" class="feedback" role="status" aria-live="polite"></p>
       </form>
     </section>
 
@@ -154,8 +124,26 @@
     <address>
       Calle Ejemplo 123, Ciudad · <a href="tel:+123456789">+12 345 6789</a>
     </address>
+    <p><a href="admin.html">Acceso administrador</a></p>
   </footer>
 
+  <!-- ASISTENTE DE IA -->
+  <button id="chat-toggle" class="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel">💬 Asistente</button>
+  <section id="chat-panel" class="chat-panel" hidden aria-label="Asistente virtual Aurora">
+    <div class="chat-cabecera">
+      <strong>Aurora · asistente virtual</strong>
+      <button id="chat-cerrar" type="button" aria-label="Cerrar chat">✕</button>
+    </div>
+    <div id="chat-log" class="chat-log" aria-live="polite"></div>
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" type="text" maxlength="500" placeholder="Pregunta por nuestros planes…" autocomplete="off" required aria-label="Tu pregunta">
+      <button type="submit" class="btn-primario">Enviar</button>
+    </form>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/chat.js"></script>
 </body>
 </html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex"> <!-- que Google no indexe el panel -->
+  <title>Panel admin | Aurora Spa</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo"><span class="logo-mark">≈</span> Aurora<span>Spa</span></a>
+    <a href="index.html">← Volver al sitio</a>
+  </header>
+
+  <main class="admin">
+    <!-- LOGIN -->
+    <section id="login" class="admin-card">
+      <h1>Acceso administrador</h1>
+      <form id="form-login" class="form-simple">
+        <label for="usuario">Usuario</label>
+        <input id="usuario" name="usuario" type="text" required autocomplete="username">
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password">
+        <button type="submit" class="btn-primario">Entrar</button>
+        <p id="login-feedback" class="feedback error" role="alert"></p>
+      </form>
+    </section>
+
+    <!-- PANEL (oculto hasta iniciar sesión) -->
+    <section id="panel" hidden>
+      <div class="admin-barra">
+        <h1>Panel de administración</h1>
+        <button id="btn-salir" class="btn-secundario" type="button">Cerrar sesión</button>
+      </div>
+
+      <h2>Solicitudes de reserva</h2>
+      <div class="tabla-scroll">
+        <table id="tabla-citas">
+          <thead><tr><th>Cliente</th><th>Contacto</th><th>Plan</th><th>Fecha</th><th>Personas</th><th>Mensaje</th><th>Estado</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h2>Planes</h2>
+      <div class="tabla-scroll">
+        <table id="tabla-planes">
+          <thead><tr><th>Nombre</th><th>Precio</th><th>Personas</th><th>Activo</th><th>Acciones</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <form id="form-plan" class="admin-card form-simple">
+        <h2 id="titulo-form-plan">Nuevo plan</h2>
+        <label for="p-slug">Código (slug, sin espacios: ej. "pareja")</label>
+        <input id="p-slug" name="slug" required pattern="[a-z0-9-]+">
+        <label for="p-nombre">Nombre</label>
+        <input id="p-nombre" name="nombre" required>
+        <label for="p-precio">Precio (COP)</label>
+        <input id="p-precio" name="precio" type="number" min="0" required>
+        <label for="p-personas">Para cuántas personas (texto visible, ej. "2 personas")</label>
+        <input id="p-personas" name="personasTexto" required>
+        <label for="p-max">Máximo de personas</label>
+        <input id="p-max" name="maxPersonas" type="number" min="1" required>
+        <label for="p-duracion">Duración (ej. "90 min")</label>
+        <input id="p-duracion" name="duracion" required>
+        <label for="p-incluye">Qué incluye (una línea por ítem)</label>
+        <textarea id="p-incluye" name="incluye" rows="4"></textarea>
+        <label class="check"><input type="checkbox" name="destacado"> Destacado</label>
+        <label class="check"><input type="checkbox" name="activo" checked> Visible al público</label>
+        <div class="fila-botones">
+          <button type="submit" class="btn-primario">Guardar plan</button>
+          <button type="button" id="btn-cancelar-plan" class="btn-secundario">Cancelar</button>
+        </div>
+        <p id="plan-feedback" class="feedback" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

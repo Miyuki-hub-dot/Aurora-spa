@@ -183,3 +183,85 @@ a { color: var(--azul-medio); text-decoration: none; }
   .site-header nav ul.abierto { display: flex; }
   .hero h1 { font-size: 2rem; }
 }
+
+/* =========================================================
+   NUEVO: estados, chat, panel admin y accesibilidad
+   ========================================================= */
+
+/* Feedback del formulario: antes el color se ponía con JS (style.color);
+   ahora son clases, así el diseño vive solo en el CSS. */
+.feedback { font-weight: 600; min-height: 1.2rem; }
+.feedback.ok { color: #1f7a4d; }
+.feedback.error { color: #b23b3b; }
+
+/* Estados de carga / error del catálogo */
+.estado-carga, .estado-error { grid-column: 1 / -1; text-align: center; padding: 2rem 1rem; }
+.estado-carga { animation: pulso 1.2s ease-in-out infinite; }
+.estado-error { color: #b23b3b; font-weight: 600; }
+@keyframes pulso { 50% { opacity: .4; } }
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--azul-suave); outline-offset: 2px;
+}
+
+/* ---------- CHAT ---------- */
+.chat-toggle {
+  position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 200;
+  background: var(--azul-medio); color: var(--blanco); border: none; cursor: pointer;
+  padding: .8rem 1.2rem; border-radius: 999px; font-size: 1rem; box-shadow: var(--sombra-suave);
+}
+.chat-panel {
+  position: fixed; right: 1.2rem; bottom: 4.5rem; z-index: 200;
+  width: min(360px, calc(100vw - 2.4rem)); height: min(480px, 70vh);
+  display: flex; flex-direction: column;
+  background: var(--blanco); border-radius: var(--radio); box-shadow: 0 14px 30px rgba(11,37,69,.2);
+  overflow: hidden; animation: fadeIn .3s ease;
+}
+.chat-panel[hidden] { display: none; }
+.chat-cabecera {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--azul-profundo); color: var(--blanco); padding: .8rem 1rem;
+}
+.chat-cabecera button { background: none; border: none; color: inherit; font-size: 1.1rem; cursor: pointer; }
+.chat-log { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; background: var(--azul-hielo); }
+.msg { max-width: 85%; padding: .6rem .9rem; border-radius: 12px; white-space: pre-wrap; }
+.msg.assistant { background: var(--blanco); align-self: flex-start; }
+.msg.user { background: var(--azul-medio); color: var(--blanco); align-self: flex-end; }
+.msg.error { color: #b23b3b; }
+.chat-form { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid #cfe0ea; }
+.chat-form input { flex: 1; padding: .6rem; border: 1px solid #cfe0ea; border-radius: 8px; font: inherit; }
+.chat-form .btn-primario { padding: .6rem 1rem; }
+
+/* ---------- PANEL ADMIN ---------- */
+.admin { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.admin h2 { margin-top: 2rem; }
+.admin-card { background: var(--blanco); padding: 2rem; border-radius: var(--radio); box-shadow: var(--sombra-suave); max-width: 520px; margin: 1.5rem auto; }
+#panel .admin-card { margin-left: 0; }
+.admin-barra { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.form-simple { display: flex; flex-direction: column; gap: .4rem; }
+.form-simple label { font-weight: 600; color: var(--azul-profundo); margin-top: .6rem; }
+.form-simple label.check { font-weight: 400; display: flex; gap: .5rem; align-items: center; }
+.form-simple input:not([type="checkbox"]), .form-simple textarea {
+  padding: .7rem; border: 1px solid #cfe0ea; border-radius: 8px; font: inherit;
+}
+.form-simple button[type="submit"] { margin-top: 1rem; }
+.fila-botones { display: flex; gap: .8rem; flex-wrap: wrap; }
+
+/* La tabla hace scroll dentro de su caja: la página nunca se desborda en celular */
+.tabla-scroll { overflow-x: auto; background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra-suave); }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { padding: .7rem .8rem; text-align: left; border-bottom: 1px solid #e3eef4; vertical-align: top; }
+th { background: var(--azul-cielo); color: var(--azul-profundo); white-space: nowrap; }
+.btn-secundario, .btn-peligro {
+  padding: .4rem .9rem; border-radius: 999px; cursor: pointer; font: inherit; font-size: .85rem; margin-right: .3rem;
+  background: var(--blanco); border: 1px solid var(--azul-medio); color: var(--azul-medio);
+}
+.btn-peligro { border-color: #b23b3b; color: #b23b3b; }
+.btn-secundario:hover { background: var(--azul-cielo); }
+.btn-peligro:hover { background: #fbeaea; }
+
+/* Respeta a quien desactivó las animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
