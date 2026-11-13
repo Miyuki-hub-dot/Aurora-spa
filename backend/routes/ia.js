@@ -37,7 +37,7 @@ REGLAS:
 
 // POST /api/ia/chat  { mensajes: [{ role: 'user'|'assistant', content }] } → { respuesta }
 router.post('/chat', limitarIA, async (req, res) => {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) {
     return res.status(503).json({ mensaje: 'La asistente no está configurada todavía.' });
   }
   try {
@@ -56,11 +56,11 @@ router.post('/chat', limitarIA, async (req, res) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'x-api-key': process.env.GEMINI_API_KEY,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5',
+        model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
         max_tokens: 500,
         system: await construirSistema(),
         messages: mensajes
